@@ -183,7 +183,8 @@ def calculateSkyStateAdvanced(skyambient, skyobject, clearbelow, cloudyabove, pa
         tsky = clearbelow
     elif tsky > cloudyabove:
         tsky = cloudyabove
-    cloudcoverPercentage = ((tsky - clearbelow) * 100.) / (cloudyabove - clearbelow)
+    cloudcoverPercentage2 = ((tsky - clearbelow) * 100.) / (cloudyabove - clearbelow)
+    cloudcoverPercentage = round(cloudcoverPercentage2, 2)
     cloudcover, percent = calculateSkyState(skyambient, skyobject, clearbelow, cloudyabove)
     return cloudcover, cloudcoverPercentage
 
@@ -223,8 +224,10 @@ def cloud(params, event):
     else:
         mlx = adafruit_mlx90614.MLX90614(i2c)
 
-    skyambient = mlx.ambient_temperature
-    skyobject = mlx.object_temperature
+    skyambient2 = mlx.ambient_temperature
+    skyobject2 = mlx.object_temperature
+    skyambient = round(skyambient2, 2)
+    skyobject = round(skyobject2, 2)
 
     if advanced:
         cloudCover, percentage = calculateSkyStateAdvanced(skyambient, skyobject, clearbelow, cloudyabove, params)

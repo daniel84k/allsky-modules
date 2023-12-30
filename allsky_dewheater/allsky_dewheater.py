@@ -528,6 +528,7 @@ def getSensorReading(sensorType, inputpin, i2caddress, dhtxxretrycount, dhtxxdel
 
         temperature = round(temperature, 2)
         humidity = round(humidity, 2)
+        pressure = round(pressure, 2)
         dewPoint = round(dewPoint, 2)
         heatIndex = round(heatIndex, 2)
 

@@ -178,9 +178,10 @@ def sqm(params, event):
     maxGain = s.asfloat(s.getSetting("nightmaxautogain"))
     gain = s.asfloat(s.getEnvironmentVariable("AS_GAIN"))
 
-    sqmAvg = cv2.mean(src=croppedImage)[0]
-    weightedSqmAvg = (((maxExposure_s - exposure_s) / 10) + 1) * (sqmAvg * (((maxGain - gain) / 10) + 1))
-
+    sqmAvg2 = cv2.mean(src=croppedImage)[0]
+    sqmAvg = round(sqmAvg2, 2)
+    weightedSqmAvg2 = (((maxExposure_s - exposure_s) / 10) + 1) * (sqmAvg * (((maxGain - gain) / 10) + 1))
+    weightedSqmAvg = round(weightedSqmAvg2, 2)
     result = "Final SQM Mean calculated as {0}, weighted {1}".format(sqmAvg, weightedSqmAvg)
     if formula != '':
         s.log(1,"INFO: SQM Mean calculated as {0}, weighted {1}".format(sqmAvg, weightedSqmAvg))
